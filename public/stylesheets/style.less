@@ -1,7 +1,7 @@
 /*Font Settings*/
 
 /*Default Settings*/
-html, body, #mapDiv {
+html, body{
     padding: 0;
     margin: 0;
     height: 100%;
@@ -12,6 +12,15 @@ a {
 }
 
 /*Map Settings*/
+
+#mapDiv{
+    position:absolute;
+    top:80px;
+    //padding-top:40px;
+    width:100%;
+    height:100%;
+
+}
 
 #locateButton{
     position: absolute;
@@ -35,3 +44,21 @@ a {
 }
 
 /*Interface Settings*/
+
+#titlebar{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height: 80px;
+    background-color: red;
+}
+
+#filterNavigator{
+    position: absolute;
+    top:0;
+    left: -120px;
+    height:100%;
+    width:120px;
+    background-color:blue;
+}
