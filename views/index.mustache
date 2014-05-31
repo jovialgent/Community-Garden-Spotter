@@ -11,21 +11,32 @@
       <script type="application/javascript" charset="UTF-8" src="http://d3js.org/d3.v3.min.js"></script>
   </head>
   <body>
-    
-    
-    <div id="titlebar">
+    <div id="helperWindow"></div>
+    {{#titleBar}}
+    <div class={{style.divClasses}} id="titlebar">
+        <span class="works" id="openFilter"><img src={{source.titleImage}}></span>
+        <h1 class="offWhiteText sailregular">
+        
+        {{info.headerText}}
+        
+        </h1>
+        
     </div>
-    <div id="filterNavigator">
+    {{/titleBar}}
+    
+    {{#filterNavigator}}
+    <div class={{style.divClasses}} id="filterNavigator">
+   
     </div>
+     {{/filterNavigator}}
     <div id="mapDiv">
         {{#mapComponents}}
             <div id={{.}}></div>
         {{/mapComponents}}
     </div>
     <div id="report">
-
+        <div id="weatherForecast"></div>
     </div>
-    <div id="weatherForecast"></div>
     <script>var dojoConfig = { parseOnLoad:true };</script>
     {{#scripts}}
     <script src={{.}}></script>
