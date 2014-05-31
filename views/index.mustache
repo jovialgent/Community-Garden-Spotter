@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    
+    {{#stylesheets}}
+    <link rel='stylesheet' href={{.}} />
+    {{/stylesheets}}
+  </head>
+  <body>
+    
+    
+    <div id="titlebar">
+    </div>
+    <div id="filterNavigator">
+    </div>
+    <div id="mapDiv">
+        {{#mapComponents}}
+            <div id={{.}}></div>
+        {{/mapComponents}}
+    </div>
+    <script>var dojoConfig = { parseOnLoad:true };</script>
+    {{#scripts}}
+    <script src={{.}}></script>
+    {{/scripts}}
+    <script>
+    
+    
+    </script>
+    
+    
+  </body>
+</html>
