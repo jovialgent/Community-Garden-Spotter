@@ -17,7 +17,9 @@ var stylesheets = [
     
     //User Stylesheets
     "stylesheets/normalize.css",
-    "stylesheets/style.css"
+    "stylesheets/style.css",
+    "/assets/fonts/sail_webfontkit/stylesheet.css",
+    "/assets/fonts/sf_burlington/stylesheet.css"
 ]
 
 var mapComponents = [
@@ -26,7 +28,44 @@ var mapComponents = [
     "homeButton"
 
 ];
+   
+
+
+//Object containing everything for the titlebar
+var titleBar = {
+    info: {
+        headerText : "Community Garden Planner"
+    },
     
+    style: {
+        divClasses : "blue",
+        titleHeader : "offWhiteText sailregular"
+    },
+    
+    source : {
+        titleImage : "/assets/images/shovelGreen.png"
+    }
+}
+
+//Object contiaining everything for the navigator
+var filterNavigator = {
+    info : {
+        
+    },
+    
+    style : {
+        divClasses : "green"
+    
+    },
+    
+    source: {
+    
+    }
+    
+
+}
+
+ 
 
 
 
@@ -35,6 +74,8 @@ exports.index = function(req, res){
     //Object containing all the settings for the 
     //mustache template.
     var templateSettings = {
+        titleBar: titleBar,
+        filterNavigator: filterNavigator,
         scripts: scripts, 
         stylesheets: stylesheets, 
         title: "Hack4Co App",

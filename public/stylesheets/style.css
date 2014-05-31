@@ -1,4 +1,29 @@
 /*Font Settings*/
+/*Colors*/
+.lightBlue {
+  background-color: #7bd4f4;
+}
+.green {
+  background-color: #7FAF7F ;
+}
+.offWhite {
+  background-color: #f0fbfd;
+}
+.offWhiteText {
+  color: #f0fbfd;
+}
+.brown {
+  background-color: #755a2b ;
+}
+.blue {
+  background-color: #5e89d2    ;
+}
+.sailregular {
+  font-family: sailregular;
+}
+.sfburlington {
+  font-family: sf_burlington_scriptBdIt;
+}
 /*Default Settings*/
 html,
 body {
@@ -34,20 +59,45 @@ a {
   left: 20px;
   z-index: 50;
 }
+#lotPopup {
+  background-color: red;
+  position: absolute;
+}
 /*Interface Settings*/
+/*titleBar Style*/
 #titlebar {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 80px;
-  background-color: red;
+}
+#titlebar h1 {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  margin-left: 33%;
+  display: block;
+  text-align: center;
+}
+#titlebar img {
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  width: 120px;
 }
 #filterNavigator {
   position: absolute;
   top: 0;
-  left: -120px;
+  left: -200px;
   height: 100%;
-  width: 120px;
-  background-color: blue;
+  width: 200px;
+}
+#report {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: green;
 }
