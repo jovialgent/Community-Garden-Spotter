@@ -99,6 +99,7 @@ $(function(){
         }
     });
 
+
     //Helper Functions
     var buildHelpWindow = function(data){
         helperWindow.empty();
@@ -108,6 +109,7 @@ $(function(){
         helperWindow.html(html);
 
     };
+
 
 
 });

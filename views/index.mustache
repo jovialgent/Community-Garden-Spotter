@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+      <meta charset="utf-8">
     <title>{{ title }}</title>
     
     {{#stylesheets}}
     <link rel='stylesheet' href={{.}} />
     {{/stylesheets}}
+
+      <script type="application/javascript" charset="UTF-8" src="http://d3js.org/d3.v3.min.js"></script>
   </head>
   <body>
     <div id="helperWindow"></div>
@@ -32,7 +35,9 @@
         {{/mapComponents}}
     </div>
     <div id="report">
+
     </div>
+    <div id="weatherForecast"></div>
     <script>var dojoConfig = { parseOnLoad:true };</script>
     {{#scripts}}
     <script src={{.}}></script>
