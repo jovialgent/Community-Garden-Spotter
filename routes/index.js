@@ -4,10 +4,10 @@ var scripts = [
     "http://code.jquery.com/ui/1.10.3/jquery-ui.js",
     "http://ajax.cdnjs.com/ajax/libs/underscore.js/1.3.3/underscore-min.js",
     "http://js.arcgis.com/3.9/",
-    "http://d3js.org/d3.v3.min.js",
     //User Libraries
     "/javascripts/my.js",
-    "/javascripts/mapStuff.js"
+    "/javascripts/mapStuff.js",
+    "/javascripts/graphs.js"
 ];
 
 var stylesheets = [
