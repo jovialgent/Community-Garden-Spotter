@@ -31,6 +31,23 @@ $(function(){
                                   }
                                  );
 
+
+    var hideWindow = {
+        effect : "slide",
+        direction: "right"
+    }
+
+    var showWindow = {
+        effect : "slide",
+        direction: "left"
+    }
+
+    var showReport = function(){
+        map.hide(showWindow);
+        titleBar.hide(showWindow);
+        report.show(hideWindow);
+    };
+
     //Keypresses
     $('body').keypress(function(evt){
         console.log(evt.which);
@@ -51,16 +68,6 @@ $(function(){
 
         var closeFilterNavigator = {
             left : "0"
-        }
-
-        var hideWindow = {
-            effect : "slide",
-            direction: "right"
-        }
-
-        var showWindow = {
-            effect : "slide",
-            direction: "left"
         }
 
         var mapVisible = $('#mapDiv').is(':visible');
@@ -85,9 +92,7 @@ $(function(){
 
         //By pressing 'r', this will show the report.
         if(evt.which === 114 && mapVisible){
-            map.hide(showWindow);
-            titleBar.hide(showWindow);
-            report.show(hideWindow);
+            showReport();
         }
 
         //By pressing 'm', this will show the map
@@ -99,6 +104,13 @@ $(function(){
         }
     });
 
+    require(
+        ["dojo/topic"],function(topic){
+            topic.subscribe("map/selection",function(data){
+                console.log("fjsjsjsfdjl");
+                showReport();
+            });
+        });
 
     //Helper Functions
     var buildHelpWindow = function(data){

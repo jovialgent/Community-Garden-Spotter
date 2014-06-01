@@ -18,12 +18,12 @@
 
 .line {
     fill: none;
-    stroke: steelblue;
+    stroke: #5e89d2;
     stroke-width: 2.5px;
 }
 
 .bar {
-    fill: steelblue;
+    fill: #5e89d2;
 }
 
 .bar:hover {

@@ -34,15 +34,7 @@
             <div id={{.}}></div>
         {{/mapComponents}}
     </div>
-<<<<<<< HEAD
-    <div id="report">
-        <div id="weather">
-            <h3>Weather Forecast</h3>
-           <div id="weatherForecast"></div>
-           <div id="weatherPrecip"></div>
-        </div>
-    </div>
-=======
+
     {{#reports}}
     <div class="brown" id="report">
         <h1>{{info.headerText}}</h1>
@@ -57,6 +49,8 @@
                 <td class="rightCol" rowspan="2">
                     <div  id="charts">
                         <h1 class="reportSectionHeader">{{info.chartHeader}}</h1>
+                        <div id="monthlyHighLow"></div>
+                        <div id="weatherPrecip"></div>
                     </div>
                 </td>
             </tr>
@@ -78,8 +72,6 @@
         </div>
     </div>
     {{/reports}}
-    <div id="weatherForecast"></div>
->>>>>>> 692ccf1f68ad406dcd3010431e2a49c07e48544f
     <script>var dojoConfig = { parseOnLoad:true };</script>
     {{#scripts}}
     <script src={{.}}></script>

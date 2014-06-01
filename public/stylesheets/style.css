@@ -123,9 +123,6 @@ a {
   left: 0px;
   height: 100%;
   width: 100%;
-<<<<<<< HEAD
-  background-color: green;
-=======
 }
 #report h1 {
   color: white;
@@ -174,5 +171,4 @@ a {
   margin-right: 1%;
   border-radius: 5px;
   float: left;
->>>>>>> 692ccf1f68ad406dcd3010431e2a49c07e48544f
 }

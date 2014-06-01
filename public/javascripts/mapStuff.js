@@ -25,7 +25,8 @@ $(function(){
             "dojo/dom-style", 
             "dijit/TooltipDialog",
             "dijit/popup",
-            "dojo/domReady!"
+            "dojo/topic",
+            "dojo/domReady!",
         ], 
         function(
         //modules
@@ -51,7 +52,8 @@ $(function(){
          //DOJO
          domStyle,
          Dialog,
-         dijitPopup
+         dijitPopup,
+         topic
 
 
 
@@ -173,7 +175,6 @@ $(function(){
 
             });
 
-            
             denverLotsLayer.on("mouse-over", function(evt){
                 //dialog.setContent("<h1>Works</h1>");
                 var dialogHTML = getDialogHTML();
@@ -181,6 +182,8 @@ $(function(){
                 //console.dir(evt.graphic.geometry);
                 var highlightGraphic = new Graphic(evt.graphic.geometry,highlightSymbol);
                 map.graphics.add(highlightGraphic);
+                highlightGraphic.attributes = evt.graphic.attributes;
+
                 var content = esriLang.substitute(evt.graphic.attributes, dialogHTML);
                 var json = esriLang.substitute(evt.graphic.attributes, makeInfoJSON());
                 json = JSON.parse(json);
@@ -199,7 +202,12 @@ $(function(){
                     y: evt.pageY
                 });
             });
-            
+            map.on("click",function(evt){
+                if(evt.graphic.attributes){
+                    console.log("Clicked:"+evt.graphic.attributes.APPROX_LOC);
+                    topic.publish("map/selection",evt.graphic.attributes);
+                }
+            });
             //END OF POTENTIAL PLOTS
             
             //BEGIN URBAN GARDENS
