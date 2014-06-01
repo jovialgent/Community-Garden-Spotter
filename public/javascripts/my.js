@@ -165,17 +165,9 @@ $(function(){
             topic.subscribe("map/selection",function(data){
                 showReport();
                 $("#reportTitle").html("Report On Lot: "+data.APPROX_LOC);
-            });
-        });
-    require(
-        ["dojo/topic"],function(topic){
-            topic.subscribe("map/selection",function(data){
-                showReport();
-                $("#reportTitle").html("Report On Lot: "+data.APPROX_LOC);
                 $('#legendDiv').css({
                     "z-index":0
                 });
-                
             });
         });
 

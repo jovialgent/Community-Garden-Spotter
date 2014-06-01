@@ -7,7 +7,8 @@ $(function(){
 
     $.ajax("/what-to-plant",{dataType:"json"}).then(function(data){
         var whatToPlant = $("#whatToPlant");
-        var html = "<h1 style='font-size:80%;'>What to plant this month</h1><table>";
+        var html = "<table style='font-size: 80%'><caption>What to Plant This Month</caption>";
+        html += "<tr><th>Type</th><th>Hardiness</th><th>Plant Spacing</th><th>Watering</th></tr>"
         for(var ii = 0; ii < data.length; ii++ ){
             var plant = data[ii];
             html+="<tr><td>"+plant.PlantType+"</td><td>"+plant.Hardiness+"</td><td>"+plant.PlantSpacing+"</td><td>"+plant.Watering+"</td></tr>";
@@ -30,13 +31,13 @@ $(function(){
             {date:new Date(2013,02,1),TPCP:143,TSNW:167,EMXT:76,EMNT:2,MMXT:505,MMNT:234,MNTM:370},
             {date:new Date(2013,03,1),TPCP:110,TSNW:109,EMXT:81,EMNT:6,MMXT:549,MMNT:288,MNTM:419},
             {date:new Date(2013,04,1),TPCP:124,TSNW:23,EMXT:89,EMNT:27,MMXT:705,MMNT:444,MNTM:574},
-    {date:new Date(2013,05,1),TPCP:41,TSNW:0,EMXT:100,EMNT:43,MMXT:866,MMNT:540,MNTM:703},
-    {date:new Date(2013,06,1),TPCP:349,TSNW:0,EMXT:101,EMNT:54,MMXT:869,MMNT:601,MNTM:735},
-    {date:new Date(2013,07,1),TPCP:158,TSNW:0,EMXT:97,EMNT:53,MMXT:876,MMNT:585,MNTM:731},
-    {date:new Date(2013,08,1),TPCP:636,TSNW:0,EMXT:95,EMNT:35,MMXT:789,MMNT:539,MNTM:664},
-    {date:new Date(2013,9,1),TPCP:62,TSNW:12,EMXT:81,EMNT:27,MMXT:595,MMNT:352,MNTM:473},
-    {date:new Date(2013,10,1),TPCP:20,TSNW:19,EMXT:70,EMNT:12,MMXT:550,MMNT:262,MNTM:406},
-    {date:new Date(2013,11,1),TPCP:27,TSNW:39,EMXT:68,EMNT:-10,MMXT:428,MMNT:148,MNTM:288}];
+            {date:new Date(2013,05,1),TPCP:41,TSNW:0,EMXT:100,EMNT:43,MMXT:866,MMNT:540,MNTM:703},
+            {date:new Date(2013,06,1),TPCP:349,TSNW:0,EMXT:101,EMNT:54,MMXT:869,MMNT:601,MNTM:735},
+            {date:new Date(2013,07,1),TPCP:158,TSNW:0,EMXT:97,EMNT:53,MMXT:876,MMNT:585,MNTM:731},
+            {date:new Date(2013,08,1),TPCP:636,TSNW:0,EMXT:95,EMNT:35,MMXT:789,MMNT:539,MNTM:664},
+            {date:new Date(2013,9,1),TPCP:62,TSNW:12,EMXT:81,EMNT:27,MMXT:595,MMNT:352,MNTM:473},
+            {date:new Date(2013,10,1),TPCP:20,TSNW:19,EMXT:70,EMNT:12,MMXT:550,MMNT:262,MNTM:406},
+            {date:new Date(2013,11,1),TPCP:27,TSNW:39,EMXT:68,EMNT:-10,MMXT:428,MMNT:148,MNTM:288}];
 
     var drawHighLow = function(data){
 
