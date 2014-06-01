@@ -34,6 +34,7 @@
             <div id={{.}}></div>
         {{/mapComponents}}
     </div>
+<<<<<<< HEAD
     <div id="report">
         <div id="weather">
             <h3>Weather Forecast</h3>
@@ -41,6 +42,44 @@
            <div id="weatherPrecip"></div>
         </div>
     </div>
+=======
+    {{#reports}}
+    <div class="brown" id="report">
+        <h1>{{info.headerText}}</h1>
+        <div class="offWhite" id="reportTop">
+        <table id="reportTable">
+            <tr>
+                <td class="leftCol firstSection">
+                    <div  id="statistics">
+                        <h1 class="reportSectionHeader">{{info.statisticsHeader}}</h1>
+                    </div>
+                </td>
+                <td class="rightCol" rowspan="2">
+                    <div  id="charts">
+                        <h1 class="reportSectionHeader">{{info.chartHeader}}</h1>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td  class="leftCol">
+                    <div id="suggestions">
+                    <h1 class="reportSectionHeader">{{info.suggestionHeader}}</h1>
+                    </div>
+                </td>
+            </tr>
+            
+            
+        </table>
+        </div>
+        
+        <div class="offWhite" id="reportBottom">
+            <div id="importantLinks">
+            </div>
+        </div>
+    </div>
+    {{/reports}}
+    <div id="weatherForecast"></div>
+>>>>>>> 692ccf1f68ad406dcd3010431e2a49c07e48544f
     <script>var dojoConfig = { parseOnLoad:true };</script>
     {{#scripts}}
     <script src={{.}}></script>
