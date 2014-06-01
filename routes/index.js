@@ -4,10 +4,10 @@ var scripts = [
     "http://code.jquery.com/ui/1.10.3/jquery-ui.js",
     "http://ajax.cdnjs.com/ajax/libs/underscore.js/1.3.3/underscore-min.js",
     "http://js.arcgis.com/3.9/",
-    "http://d3js.org/d3.v3.min.js",
     //User Libraries
     "/javascripts/my.js",
-    "/javascripts/mapStuff.js"
+    "/javascripts/mapStuff.js",
+    "/javascripts/graphs.js"
 ];
 
 var stylesheets = [
@@ -17,16 +17,94 @@ var stylesheets = [
     
     //User Stylesheets
     "stylesheets/normalize.css",
-    "stylesheets/style.css"
+    "stylesheets/style.css",
+    "stylesheets/graphs.css",
+    "/assets/fonts/sail_webfontkit/stylesheet.css",
+    "/assets/fonts/sf_burlington/stylesheet.css",
+    "/assets/fonts/PrintClearly/stylesheet.css",
+    "/assets/fonts/ostrich/stylesheet.css"
+    
 ]
 
 var mapComponents = [
     "locateButton",
     "basemapToggle",
-    "homeButton"
+    "homeButton"   
+    //"legendDiv"
 
 ];
+
+var layers = [
+    {
+        id : "population",
+        description: "Population Density"
+    },
+    {
+        id : "dug",
+        description: "Community Garden Locations"
+    }
+]
+   
+
+
+//Object containing everything for the titlebar
+var titleBar = {
+    info: {
+        headerText : "Community Garden Planner"
+    },
     
+    style: {
+        divClasses : "blue",
+        titleHeader : "offWhiteText sailregular"
+    },
+    
+    source : {
+        titleImage : "/assets/images/shovelGreen.png"
+    }
+}
+
+//Object contiaining everything for the navigator
+var filterNavigator = {
+    info : {
+        headerText : "Community Information"
+        
+    },
+    
+    style : {
+        divClasses : "green"
+    
+    },
+    
+    source: {
+    
+    }
+    
+
+}
+
+var reports = {
+    info : {
+        headerText : "Report On Lot:",
+        statisticsHeader : "General Stats",
+        suggestionHeader: "Suggestions",
+        chartHeader : "Charts/Graphs"
+        
+    },
+    
+    style : {
+        divClasses : "green"
+    
+    },
+    
+    source: {
+    
+    }
+    
+
+}
+
+
+ 
 
 
 
@@ -35,6 +113,10 @@ exports.index = function(req, res){
     //Object containing all the settings for the 
     //mustache template.
     var templateSettings = {
+        titleBar: titleBar,
+        filterNavigator: filterNavigator,
+        layers: layers,
+        reports:reports,
         scripts: scripts, 
         stylesheets: stylesheets, 
         title: "Hack4Co App",
