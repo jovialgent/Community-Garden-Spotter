@@ -18,6 +18,7 @@ var stylesheets = [
     //User Stylesheets
     "stylesheets/normalize.css",
     "stylesheets/style.css",
+    "stylesheets/graphs.css",
     "/assets/fonts/sail_webfontkit/stylesheet.css",
     "/assets/fonts/sf_burlington/stylesheet.css",
     "/assets/fonts/PrintClearly/stylesheet.css",
@@ -28,9 +29,21 @@ var stylesheets = [
 var mapComponents = [
     "locateButton",
     "basemapToggle",
-    "homeButton"
+    "homeButton"   
+    //"legendDiv"
 
 ];
+
+var layers = [
+    {
+        id : "population",
+        description: "Population Density"
+    },
+    {
+        id : "dug",
+        description: "Community Garden Locations"
+    }
+]
    
 
 
@@ -53,6 +66,7 @@ var titleBar = {
 //Object contiaining everything for the navigator
 var filterNavigator = {
     info : {
+        headerText : "Community Information"
         
     },
     
@@ -70,7 +84,7 @@ var filterNavigator = {
 
 var reports = {
     info : {
-        headerText : "Report On Lot: <<APPROXIMATE ADDRESS>>",
+        headerText : "Report On Lot:",
         statisticsHeader : "General Stats",
         suggestionHeader: "Suggestions",
         chartHeader : "Charts/Graphs"
@@ -101,6 +115,7 @@ exports.index = function(req, res){
     var templateSettings = {
         titleBar: titleBar,
         filterNavigator: filterNavigator,
+        layers: layers,
         reports:reports,
         scripts: scripts, 
         stylesheets: stylesheets, 

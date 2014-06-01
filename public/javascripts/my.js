@@ -4,7 +4,6 @@ $(function(){
     var filter = $('#filterNavigator');
     var report = $('#report');
     var helperWindow =  $('#helperWindow');
-    var filterNavigatorWindowSize = "200px";
 
     var helperWindow = {
         openFilter :{
