@@ -107,8 +107,8 @@ $(function(){
     require(
         ["dojo/topic"],function(topic){
             topic.subscribe("map/selection",function(data){
-                console.log("fjsjsjsfdjl");
                 showReport();
+                $("#reportTitle").html("Report On Lot: "+data.APPROX_LOC);
             });
         });
 
