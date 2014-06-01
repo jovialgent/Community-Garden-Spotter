@@ -101,24 +101,3 @@ a {
   width: 100%;
   background-color: green;
 }
-<<<<<<< HEAD
-=======
-
-/******* D3 Styles ******/
-.axis path,
-.axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-}
-
-.x.axis path {
-    display: none;
-}
-
-.line {
-    fill: none;
-    stroke: steelblue;
-    stroke-width: 1.5px;
-}
->>>>>>> f5da22476ee94b37398845f42e234669bd010f22

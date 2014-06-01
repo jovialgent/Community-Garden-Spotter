@@ -18,6 +18,7 @@ var stylesheets = [
     //User Stylesheets
     "stylesheets/normalize.css",
     "stylesheets/style.css",
+    "stylesheets/graphs.css",
     "/assets/fonts/sail_webfontkit/stylesheet.css",
     "/assets/fonts/sf_burlington/stylesheet.css"
 ]
