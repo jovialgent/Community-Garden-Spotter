@@ -19,7 +19,10 @@ var stylesheets = [
     "stylesheets/normalize.css",
     "stylesheets/style.css",
     "/assets/fonts/sail_webfontkit/stylesheet.css",
-    "/assets/fonts/sf_burlington/stylesheet.css"
+    "/assets/fonts/sf_burlington/stylesheet.css",
+    "/assets/fonts/PrintClearly/stylesheet.css",
+    "/assets/fonts/ostrich/stylesheet.css"
+    
 ]
 
 var mapComponents = [
@@ -65,6 +68,28 @@ var filterNavigator = {
 
 }
 
+var reports = {
+    info : {
+        headerText : "Report On Lot: <<APPROXIMATE ADDRESS>>",
+        statisticsHeader : "General Stats",
+        suggestionHeader: "Suggestions",
+        chartHeader : "Charts/Graphs"
+        
+    },
+    
+    style : {
+        divClasses : "green"
+    
+    },
+    
+    source: {
+    
+    }
+    
+
+}
+
+
  
 
 
@@ -76,6 +101,7 @@ exports.index = function(req, res){
     var templateSettings = {
         titleBar: titleBar,
         filterNavigator: filterNavigator,
+        reports:reports,
         scripts: scripts, 
         stylesheets: stylesheets, 
         title: "Hack4Co App",
