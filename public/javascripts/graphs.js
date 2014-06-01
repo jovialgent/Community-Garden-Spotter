@@ -4,6 +4,17 @@
 
 $(function(){
 
+    $.ajax("/what-to-plant",{dataType:"json"}).then(function(data){
+        var whatToPlant = $("#whatToPlant");
+        var html = "<h1 style='font-size:80%;'>What to plant this month</h1><table>";
+        for(var ii = 0; ii < data.length; ii++ ){
+            var plant = data[ii];
+            html+="<tr><td>"+plant.PlantType+"</td><td>"+plant.Hardiness+"</td><td>"+plant.PlantSpacing+"</td><td>"+plant.Watering+"</td></tr>";
+        }
+        html+="</table>";
+        whatToPlant.html(html);
+    });
+
     // EMXT - Extreme maximum daily temperature
     // MMNT - Monthly Mean minimum temperature
     // EMNT - Extreme minimum daily temperature
@@ -27,29 +38,7 @@ $(function(){
     {date:new Date(2013,11,1),TPCP:27,TSNW:39,EMXT:68,EMNT:-10,MMXT:428,MMNT:148,MNTM:288}];
 
 
-
-    /*$.ajax("http://api.openweathermap.org/data/2.5/forecast/daily?q=Denver&mode=json&cnt=7&units=imperial", {dataType:"json"}).then(function(data){
-        console.log("Weather data loaded.");
-        var flattenedTemps = [];
-        var HOURS_TO_MS = 1000*60*60;
-        data.list.forEach(function(item){
-            item.date = new Date(item.dt * 1000 + 12* HOURS_TO_MS);
-            var dtInMs = item.dt * 1000;
-            flattenedTemps.push({date:new Date(dtInMs + HOURS_TO_MS),temperature:item.temp.morn});
-            flattenedTemps.push({date:new Date(dtInMs + 6* HOURS_TO_MS),temperature:item.temp.day});
-            flattenedTemps.push({date:new Date(dtInMs + 12* HOURS_TO_MS),temperature:item.temp.eve});
-            flattenedTemps.push({date:new Date(dtInMs + 18* HOURS_TO_MS),temperature:item.temp.night});
-            item.high = item.temp.max;
-            item.low = item.temp.min;
-            item.avg = (item.temp.morn + item.temp.day + item.temp.eve + item.temp.night)/4;
-            item.rain = (item.rain)?item.rain:0;
-        });
-        //drawForecastHighLowAvg(data.list);
-        drawForecast(flattenedTemps);
-        drawPrecip(data.list);
-    });*/
-
-    var drawHigLow = function(data){
+    var drawHighLow = function(data){
 
         var margin = {top: 30, right: 20, bottom: 30, left: 70},
             width = 500 - margin.left - margin.right,
@@ -76,6 +65,10 @@ $(function(){
             .y0(function(d) { return y(d.EMNT); })
             .y1(function(d) { return y(d.EMXT); });
 
+        var line = d3.svg.line().interpolate("basis")
+            .x(function(d) { return x(d.date); })
+            .y(function(d) { return y(d.MNTM/10); });
+
         var svg = d3.select("#monthlyHighLow").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -92,6 +85,11 @@ $(function(){
             .attr("d", area)
             .style("fill",function(){return "#5e89d2"});
 
+        svg.append("path")
+            .datum(data)
+            .attr("class", "line")
+            .attr("d", line);
+
         svg.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
@@ -107,7 +105,7 @@ $(function(){
             .style("text-anchor", "end")
             .text("Temperature (\u00b0F)");
     };
-    drawHigLow(noaaData);
+    drawHighLow(noaaData);
 
     var drawForecast = function(data){
         var margin = {top: 20, right: 20, bottom: 30, left: 50},
@@ -166,98 +164,6 @@ $(function(){
 
 
     };
-
-
-    var drawForecastHighLowAvg = function (data) {
-        var margin = {top: 20, right: 20, bottom: 30, left: 50},
-            width = 500 - margin.left - margin.right,
-            height = 300 - margin.top - margin.bottom;
-
-        var x = d3.time.scale()
-            .range([0, width]);
-
-        var y = d3.scale.linear()
-            .range([height, 0]);
-
-        var xAxis = d3.svg.axis()
-            .scale(x)
-            .orient("bottom")
-            .ticks(12);
-
-        var yAxis = d3.svg.axis()
-            .scale(y)
-            .orient("left");
-
-        var line = d3.svg.line().interpolate("basis")
-            .x(function(d) { return x(d.date); })
-            .y(function(d) { return y(d.temperature); });
-        var color = d3.scale.category10();
-        color.domain(d3.keys({EMXT:"EMXT",EMNT:"EMNT"}));
-
-        var tempRanges = color.domain().map(function(name) {
-            return {
-                name: name,
-                values: data.map(function(d) {
-                    return {date: d.date, temperature: +d[name]};
-                })
-            };
-        });
-
-        var svg = d3.select("#monthlyHighLow").append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-
-        x.domain(d3.extent(data, function(d) { return d.date; }));
-        y.domain([
-            d3.min(tempRanges, function(c) { return d3.min(c.values, function(v) { return v.temperature; }); }),
-            d3.max(tempRanges, function(c) { return d3.max(c.values, function(v) { return v.temperature; }); })
-        ]);
-
-        svg.append("g")
-            .attr("class", "x axis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(xAxis);
-
-        svg.append("g")
-            .attr("class", "y axis")
-            .call(yAxis)
-            .append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 6)
-            .attr("dy", ".71em")
-            .style("text-anchor", "end")
-            .text("Temperature (\u00b0F)");
-
-        var tempSeries = svg.selectAll(".tempSeries")
-            .data(tempRanges)
-            .enter().append("g")
-            .attr("class", "tempSeries");
-
-        tempSeries.append("path")
-            .attr("class", "line")
-            .attr("d", function(d) {
-                return line(d.values);
-            })
-            .style("stroke", function(d) {
-                return color(d.name);
-            });
-
-        tempSeries.append("text")
-            .datum(function(d) {
-                return {name: d.name, value: d.values[d.values.length - 1]};
-            })
-            .attr("transform", function(d) {
-                return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")";
-            })
-            .attr("x", 3)
-            .attr("dy", ".35em")
-            .text(function(d) { return d.name; });
-    };
-
-    //drawForecastHighLowAvg(noaaData);
 
     var drawPrecip = function(data){
         var margin = {top: 30, right: 20, bottom: 30, left: 70},
