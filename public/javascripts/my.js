@@ -4,12 +4,30 @@ $(function(){
     var filter = $('#filterNavigator');
     var report = $('#report');
     var helperWindow =  $('#helperWindow');
+    var filterNavigatorWindowSize = "400px";
 
     var helperWindow = {
         openFilter :{
             headerText : "Let's start!",
             bodyText : "Click on the shovel to begin your community gardening."
         }
+    }
+    var showFilterNavigator = {
+        left : "0"
+
+    };
+
+    var openFilterNavigator = {
+        left : filterNavigatorWindowSize
+    }
+
+    var hideFilterNavigator = {
+        left : "-"+filterNavigatorWindowSize
+
+    };
+
+    var closeFilterNavigator = {
+        left : "0"
     }
 
     //Hide Windows
@@ -22,13 +40,52 @@ $(function(){
         var thisImg = $(this);
         //alert("WORKS?");
         thisImg.attr('src', '/assets/images/shovelGreenHover.png');
-
     },
                                   function(evt){
                                       var thisImg = $(this);
                                       thisImg.attr('src', '/assets/images/shovelGreen.png');
                                   }
-                                 );
+                                 )
+    .click(function(evt){
+        map.animate(openFilterNavigator);
+        titleBar.animate(openFilterNavigator);
+        filter.animate(showFilterNavigator);
+    });
+
+
+
+    var hideWindow = {
+        effect : "slide",
+        direction: "right"
+    }
+
+    var showWindow = {
+        effect : "slide",
+        direction: "left"
+    }
+
+    var showReport = function(){
+        map.hide(showWindow);
+        titleBar.hide(showWindow);
+        report.show(hideWindow);
+    };
+
+
+    var hideWindow = {
+        effect : "slide",
+        direction: "right"
+    }
+
+    var showWindow = {
+        effect : "slide",
+        direction: "left"
+    }
+
+    var showReport = function(){
+        map.hide(showWindow);
+        titleBar.hide(showWindow);
+        report.show(hideWindow);
+    };
 
     //Keypresses
     $('body').keypress(function(evt){
@@ -50,16 +107,6 @@ $(function(){
 
         var closeFilterNavigator = {
             left : "0"
-        }
-
-        var hideWindow = {
-            effect : "slide",
-            direction: "right"
-        }
-
-        var showWindow = {
-            effect : "slide",
-            direction: "left"
         }
 
         var mapVisible = $('#mapDiv').is(':visible');
@@ -84,9 +131,7 @@ $(function(){
 
         //By pressing 'r', this will show the report.
         if(evt.which === 114 && mapVisible){
-            map.hide(showWindow);
-            titleBar.hide(showWindow);
-            report.show(hideWindow);
+            showReport();
         }
 
         //By pressing 'm', this will show the map
@@ -98,6 +143,26 @@ $(function(){
         }
     });
 
+    require(
+        ["dojo/topic"],function(topic){
+            topic.subscribe("map/selection",function(data){
+                showReport();
+                $("#reportTitle").html("Report On Lot: "+data.APPROX_LOC);
+            });
+        });
+
+
+    require(
+        ["dojo/topic"],function(topic){
+            topic.subscribe("map/selection",function(data){
+                showReport();
+                $("#reportTitle").html("Report On Lot: "+data.APPROX_LOC);
+                $('#legendDiv').css({
+                    "z-index":0
+                });
+                
+            });
+        });
 
     //Helper Functions
     var buildHelpWindow = function(data){

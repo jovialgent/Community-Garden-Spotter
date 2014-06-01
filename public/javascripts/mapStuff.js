@@ -1,4 +1,5 @@
 $(function(){
+
     require(
         [
             //filepaths
@@ -28,10 +29,11 @@ $(function(){
 
             //DOJO CODE
             "dojo/dom-style", 
-            
+
             "dijit/TooltipDialog",
             "dijit/popup",
             "dojo/topic",
+
             "dijit/layout/ContentPane", 
             "dojo/domReady!",
         ], 
@@ -70,6 +72,8 @@ $(function(){
 
 
             ){
+
+
                 //code to run
 
                 //Map reference var
@@ -96,9 +100,10 @@ $(function(){
                     //    map settings
                     center: [-104.9926110, 39.7335360],
                     zoom: 14,
-                    basemap: "gray",
-
+                    basemap: "gray"
                 });
+
+
 
 
                 map.infoWindow.resize(275,275);
@@ -109,7 +114,7 @@ $(function(){
                 });
                 dialog.startup();
 
-                var locateButton = new LocateButton({
+                locateButton = new LocateButton({
                     map: map
 
                 }, "locateButton");
@@ -226,6 +231,11 @@ $(function(){
                     map: map
                 }, "legendDiv");
                 legendDijit.startup();
+                function closeDialog() {
+                    map.graphics.clear();
+                    dijitPopup.close(dialog);
+
+                };
 
 
                 //close the dialog when the mouse leaves the highlight graphic
@@ -234,6 +244,7 @@ $(function(){
                     map.graphics.on("mouse-out", closeDialog);
 
                 });
+
 
 
                 denverLotsLayer.on("mouse-over", function(evt){
@@ -247,8 +258,8 @@ $(function(){
                     highlightGraphic.attributes = evt.graphic.attributes;
 
                     var content = esriLang.substitute(evt.graphic.attributes, dialogHTML);
-                    var json = esriLang.substitute(evt.graphic.attributes, makeInfoJSON());
-                    json = JSON.parse(json);
+                    //var json = esriLang.substitute(evt.graphic.attributes, makeInfoJSON());
+                    //json = JSON.parse(json);
 
                     dialog.setContent(content);
                     //console.dir(evt.graphic);
@@ -265,12 +276,23 @@ $(function(){
                     });
                 });
 
+
+
                 map.on("click",function(evt){
                     if(evt.graphic.attributes){
                         console.log("Clicked:"+evt.graphic.attributes.APPROX_LOC);
                         topic.publish("map/selection",evt.graphic.attributes);
                     }
                 });
+                //END OF POTENTIAL PLOTS
+
+                //BEGIN URBAN GARDENS
+
+                //var gardenUrl = "https://maps.google.com/maps/ms?hl=en&ie=UTF8&source=embed&dg=feature&authuser=0&msa=0&output=kml&msid=211918099394035570605.000456f1e9657b8060c21 ";
+
+                //var kml = new esri.layers.KMLLayer(gardenUrl); 
+                //map.addLayer(kml);
+
 
                 //END OF POTENTIAL PLOTS
 
@@ -289,7 +311,7 @@ $(function(){
                     }); 
                 map.addLayer(kml);
                 map.getLayer("dug").hide();
-                
+
                 $('#dug').click(function(evt){
                     if(map.getLayer('dug').visible){
                         map.getLayer('dug').hide();
@@ -333,43 +355,6 @@ $(function(){
                 //map.addLayer([denverLotsLayer, foodStore]);
 
 
-                function closeDialog() {
-                    map.graphics.clear();
-                    dijitPopup.close(dialog);
-
-                };
-
-                function makeInfoJSON() {
-                    var json = "{";
-                    var fields = [
-                        {
-                            objName : "landUse",
-                            tableName: "${CPD_LU_II:String}"
-                        },
-                        {
-                            objName : "area",
-                            tableName : "${Shape_Area:NumberFormat}"
-                        },
-                        {
-                            objName : "soilType",
-                            tableName : "${L1_SOILTYP:String}"
-                        }
-
-                    ];
-
-                    for(var i = 0; i < fields.length; i++){
-                        var field = fields[i];
-                        if(i === fields.length - 1){
-                            json += '"'+field.objName+'":"'+field.tableName+'"'; 
-                        } else {
-                            json += '"'+field.objName+'":"'+field.tableName+'", ';
-
-                        }
-
-                    }
-                    json += "}";
-                    return json;
-                };
 
                 function getDialogHTML(cost) {
                     var html = "";
@@ -391,7 +376,7 @@ $(function(){
 
                     ]
                     html += "<h1>Lot Information</h1>";
-                    html += "<div class='lotPopupDiv'>"
+                    html += "<div class='lotPopupDiv'>";
                     for(var i = 0; i < fields.length; i++){
                         var field = fields[i];
                         html += "<span class='lotPopupLabel'>"+field.label+": </span><br><span class='lotPopupText'>"+field.tableName+"</span><br><br>";
@@ -403,7 +388,4 @@ $(function(){
                 }
 
             });
-
-
-
             });
